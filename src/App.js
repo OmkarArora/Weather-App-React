@@ -33,9 +33,15 @@ function App() {
 
   useEffect(() => fetchWeather(), [])
 
-  async function fetchWeather(){
-    await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=london&appid=8aa87ed1baa121bf9ef01da73725b67d&units=metric"
+   function fetchWeather(){
+// let url ="";
+    // if(navigator.geolocation){
+    //   let position = navigator.geolocation()
+    //   url=`https://api.openweathermap.org/data/2.5/weather?lat=${}&lon=${lon}&appid={API key}`
+    // }
+
+     fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=london&appid=${process.env.REACT_APP_WEATHER_API}&units=metric`
     )
       .then((response) => response.json())
       .then((data) => {

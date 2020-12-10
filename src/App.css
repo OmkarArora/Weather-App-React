@@ -93,6 +93,7 @@ div {
   border-radius: 0.5rem;
   background-color: var(--card-color);
   padding: 1rem 0.8rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .card .card-header {
