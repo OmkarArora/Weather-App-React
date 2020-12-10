@@ -1,13 +1,30 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
+
+:root {
+  --body-color-primary: #374151;
+  --body-color-secondary: #6b7280;
+  --body-color-tertiary: #d1d5db;
+  --card-color: #d1d5db;
+  --card-header-color: #374151;
+  --card-content-color: #111827;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  height: 100vh;
+  background-image: linear-gradient(
+    180deg,
+    var(--body-color-primary),
+    var(--body-color-secondary),
+    var(--body-color-tertiary)
+  );
+  /* var(--body-color-secondary), */
+  background-repeat: no-repeat;
+}
+
+@media (max-height: 700px) {
+  body {
+    height: unset;
+  }
 }
