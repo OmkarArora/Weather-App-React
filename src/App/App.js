@@ -1,36 +1,18 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import arrowIcon from "./images/arrow.svg";
-import locationIcon from "./images/location.svg";
-import sunIcon from "./images/sun.svg";
-import moonIcon from "./images/half-moon.svg";
+import arrowIcon from "../images/arrow.svg";
+import locationIcon from "../images/location.svg";
 
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+import TimeDisplay from "../TimeDisplay/TimeDisplay";
+import { getHeaderImage } from "../util/getHeaderImage";
+
 
 function App() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   const [weatherData, setWeatherData] = useState({});
-
   const [weatherIcon, setWeatherIcon] = useState("");
-
-  useEffect(() => {
-    setTimeout(() => setCurrentDate(new Date()), 1000);
-  });
-
+  const [timezone, setTimezone] = useState(0);
+  const [headerIcon, setHeaderIcon] = useState({icon:"", alt:""});
+ 
   useEffect(() => fetchWeather(), [])
 
    function fetchWeather(){
@@ -48,6 +30,10 @@ function App() {
        setWeatherData(data)
        let icon = data.weather[0].icon;
        setWeatherIcon(`http://openweathermap.org/img/wn/${icon}@2x.png`)
+
+       let timezone = data.timezone;
+       setTimezone(timezone);
+       setHeaderIcon(getHeaderImage(timezone));
       })
       .catch((error) => console.log("An error occured"));
   }
@@ -60,26 +46,15 @@ function App() {
             <img src={locationIcon} alt="location" className="location-icon" />
             {weatherData!==undefined?weatherData.name:""}, {weatherData!==undefined && weatherData.sys!==undefined?weatherData.sys.country:""}
           </p>
-          <p className="date-time">
-            {months[currentDate.getMonth()]} {currentDate.getDate()},{" "}
-            {currentDate.getHours()}:{currentDate.getMinutes()}:
-            {currentDate.getSeconds().toString().length===1?`0${currentDate.getSeconds()}`:currentDate.getSeconds()}
-          </p>
+          <TimeDisplay timezone={timezone}/>
         </span>
         <span>
-          <img
-            src={
-              currentDate.getHours() > 5 && currentDate.getHours() < 17
-                ? sunIcon
-                : moonIcon
-            }
+          {headerIcon.icon!==""? <img
+            src={headerIcon.icon}
             className="time-indication-icon"
-            alt={
-              currentDate.getHours() > 5 && currentDate.getHours() < 17
-                ? "Sun"
-                : "Moon"
-            }
-          />
+            alt={headerIcon.alt}
+          />: <></>}
+         
         </span>
       </div>
 
