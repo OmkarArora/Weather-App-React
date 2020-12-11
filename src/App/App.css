@@ -7,6 +7,38 @@
   margin: auto;
 }
 
+.place-editor-container {
+  text-align: center;
+  padding: 0.5rem 0rem 1.5rem 0rem;
+}
+
+.place-editor-container .input-place {
+  border-radius: 2.5rem;
+  padding: 0.5rem;
+  border: none;
+  font-family: inherit;
+}
+
+.place-editor-container .input-place:focus {
+  outline: none;
+}
+
+.place-editor-container .btn-search {
+  margin-left: 0.8rem;
+  border-radius: 2.5rem;
+  padding: 0.5rem;
+  border: none;
+  font-family: inherit;
+  color: var(--card-color);
+  font-weight: 500;
+  background-color: var(--background-color-primary);
+  cursor: pointer;
+}
+
+.place-editor-container .btn-search:focus {
+  outline: none;
+}
+
 div {
   /* border: 1px solid black; */
   width: 100%;
@@ -29,6 +61,12 @@ div {
 .location-icon {
   width: 1.5rem;
   padding: 0rem 0.4rem 0rem 0rem;
+}
+
+.place-edit-icon {
+  width: 0.9rem;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .place-container .date-time {
