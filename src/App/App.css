@@ -17,6 +17,9 @@
   padding: 0.5rem;
   border: none;
   font-family: inherit;
+  background-color: var(--card-color);
+  color: var(--background-color-primary);
+  font-weight: bold;
 }
 
 .place-editor-container .input-place:focus {

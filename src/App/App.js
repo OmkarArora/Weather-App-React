@@ -17,9 +17,38 @@ function App() {
   const [activePlace, setActivePlace] = useState("London");
 
   useEffect(() => {
+    getCurrentLocationWeather();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     fetchWeather();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePlace]);
+
+  function getCurrentLocationWeather(){
+    if(!navigator.geolocation) {
+      fetchWeather();
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setWeatherData(data);
+            let icon = data.weather[0].icon;
+            setWeatherIcon(`http://openweathermap.org/img/wn/${icon}@2x.png`);
+    
+            let timezone = data.timezone;
+            setTimezone(timezone);
+            setHeaderIcon(getHeaderImage(timezone));
+          })
+          .catch((error) => alert("An error occurred"));
+      }, () => fetchWeather());
+    }
+  }
+
 
   function fetchWeather() {
     fetch(
